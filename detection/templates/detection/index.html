@@ -15,6 +15,11 @@
             align-items: center;
             height: 100vh;
         }
+        label {
+            font-weight: bold;
+            color: #333;
+        }
+        
 
         .container {
             max-width: 500px;
@@ -52,6 +57,15 @@
         button:hover {
             background-color: #2575fc;
         }
+        .footer-text {
+            margin-top: 20px;
+            font-weight: bold;
+            font-size: 0.9em;
+            color: #6a11cb; /* Matching primary color */
+            text-align: center;
+            opacity: 0.8; /* Slight transparency for a sleek effect */
+        }
+        
 
         .result {
             margin-top: 20px;
@@ -69,9 +83,13 @@
         <h2>Email Spam Detection</h2>
         <form method="POST">
             {% csrf_token %}
-            {{ form.as_p }}
+            <label for="email">Enter Email to Check:</label>
+<textarea id="email" name="email" rows="5" placeholder="Type your email here..."></textarea>
+
             <button type="submit">Check</button>
         </form>
+        <p class="footer-text">© IC Daniels Project @Nebiant Analytics 2025.</p>
+
         {% if result %}
         <div class="result {% if result == 'Spam' %}spam{% else %}ham{% endif %}">
             Result: {{ result }}
