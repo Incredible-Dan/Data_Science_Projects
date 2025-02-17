@@ -19,7 +19,7 @@ def detect_spam(request):
     if request.method == "POST":
         form = EmailForm(request.POST)
         if form.is_valid():
-            text = form.cleaned_data["content"]
+            text = form.cleaned_data["email"]
             text_vectorized = vectorizer.transform([text])
             prediction = model.predict(text_vectorized)[0]
             result = "Spam" if prediction == 1 else "Ham"
