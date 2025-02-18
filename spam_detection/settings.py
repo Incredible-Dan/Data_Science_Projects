@@ -15,7 +15,6 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 
 
 from pathlib import Path
-import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -28,9 +27,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = "django-insecure-6n^##mo*ec0xccrclrs0e(^s6s3r4l-%!h+4tvu!su6$qzy20t"
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['.vercel.app','127.0.0.1','.now.sh']
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -80,25 +79,25 @@ WSGI_APPLICATION = "spam_detection.wsgi.application"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 
-#DATABASES = {
-     #"default": {
-       # "ENGINE": "django.db.backends.sqlite3",
-       #"NAME": BASE_DIR / "db.sqlite3",
-    #}
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'railway',
-        'USER': 'postgres',  # Replace with your PythonAnywhere MySQL username
-        'PASSWORD': 'wtjVnhXnUyWsVaMVHfcIWuDwVJorlsnV',  # Replace with your Postgres password
-        'HOST': 'metro.proxy.rlwy.net',  # PythonAnywhere MySQL host
-        'PORT': '20562',  # Default Postgresql port
-   }
+     "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+       "NAME": BASE_DIR / "db.sqlite3",
+    }
+#DATABASES = {
+   # 'default': {
+      #  'ENGINE': 'django.db.backends.mysql',
+      #  'NAME': 'danswotty$default',  # Replace with your actual database name from PythonAnywhere
+       # 'USER': 'danswotty',  # Replace with your PythonAnywhere MySQL username
+       # 'PASSWORD': '100%Secured',  # Replace with your MySQL password
+       # 'HOST': 'danswotty.mysql.pythonanywhere-services.com',  # PythonAnywhere MySQL host
+       # 'PORT': '3306',  # Default MySQL port
+   ## }
 }
 
 DEBUG = False  # Disable debug mode in production
 
-ALLOWED_HOSTS = ['danswotty.pythonanywhere.com']  # Replace with your PythonAnywhere domain
+ALLOWED_HOSTS = ['*']  # Replace with your PythonAnywhere domain
 
 
 
@@ -138,22 +137,17 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = "static/"
-STATICFILES_DIRS =[os.path.join(BASE_DIR,'static')]
-STATIC_ROOT = os.path.join(BASE_DIR,'staticfiles_build','static')
 
-MEDIA_URL ='/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR,'static/images')
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-INTERNAL_IPS = '127.0.0.1'
+import django_heroku
+import os
 
-#import django_heroku
-#import os
 # Activate Django-Heroku settings
-#django_heroku.settings(locals())
+django_heroku.settings(locals())
 
 # Configure WhiteNoise for static files
 #MIDDLEWARE = [
@@ -162,6 +156,7 @@ INTERNAL_IPS = '127.0.0.1'
     # Other middlewares...
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',  # Required for session management
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
