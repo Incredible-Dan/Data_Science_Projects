@@ -95,9 +95,9 @@ DATABASES = {
    ## }
 }
 
-DEBUG = False  # Disable debug mode in production
+DEBUG = True  # Disable debug mode in production
 
-ALLOWED_HOSTS = ['*']  # Replace with your PythonAnywhere domain
+ALLOWED_HOSTS = ['email-spam-app.herokuapp.com', '127.0.0.1']  # Replace with your PythonAnywhere domain
 
 
 
@@ -167,6 +167,10 @@ MIDDLEWARE = [
 
 #]
 
+import dj_database_url
+
+DATABASES["default"] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+
 # Static files (CSS, JavaScript, Images)
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 STATIC_URL = '/static/'
@@ -176,4 +180,7 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 # Enable WhiteNoise compression and caching
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+MODEL_DIR = os.path.join(BASE_DIR, "detection", "models")
+
 
