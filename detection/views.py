@@ -31,7 +31,8 @@ def detect_spam(request):
             else:
                 text_vectorized = vectorizer.transform([text])
                 prediction = model.predict(text_vectorized)[0]
-                result = "Spam" if prediction == 1 else "Ham"
+                result = "Spam" if prediction == 1 else "Not Spam"
+
     else:
         form = EmailForm()
     

@@ -90,8 +90,9 @@
         </form>
         {% if result %}
         <div class="result {% if result == 'Spam' %}spam{% else %}ham{% endif %}">
-            Result: {{ result }}
+            Result: {% if result == 'Spam' %}Spam{% else %}Not Spam{% endif %}
         </div>
+        
         {% endif %}
         <p class="footer-text">© IC Daniels Project @Nebiant Analytics 2025.</p>
     </div>
